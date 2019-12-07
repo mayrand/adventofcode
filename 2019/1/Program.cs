@@ -7,7 +7,20 @@ namespace _1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(System.IO.File.ReadAllLines("input").Select(v => int.Parse(v)).Sum(x => x / 3 - 2));
+            Console.WriteLine(System.IO.File.ReadAllLines("input")
+            .Select(mass => int.Parse(mass))
+            .Sum(x => FuelAmmount(x)));
+            Console.WriteLine($"{FuelAmmount(1969)}");
+        }
+
+        static int FuelAmmount(int mass)
+        {
+            var fuel = mass / 3 - 2;
+            if (fuel > 0)
+                fuel += FuelAmmount(fuel);
+            else
+                return 0;
+            return fuel;
         }
     }
 }
