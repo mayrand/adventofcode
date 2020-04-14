@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.IO;
+
 namespace _2
 {
     class Program
@@ -8,8 +9,27 @@ namespace _2
         static void Main(string[] args)
         {
             var data = File.ReadAllText("input").Split(',').Select(int.Parse).ToArray();
-            IntCode(ref data);
-            Console.WriteLine(string.Join(", ", data));
+            int[] newSet = new int[data.Length];
+
+            int[] BruteForceIntCode()
+            {
+                for (int noun = 0; noun < data.Length; noun++)
+                {
+                    for (int verb = 0; verb < data.Length; verb++)
+                    {
+                        data.CopyTo(newSet, 0);
+                        newSet[1] = noun;
+                        newSet[2] = verb;
+                        IntCode(ref newSet);
+                        if (newSet[0] == 19690720)
+                            return newSet;
+                    }
+                }
+
+                return null;
+            }
+
+            Console.WriteLine(string.Join(", ", BruteForceIntCode() ?? new[] {0, 0}));
         }
 
         static void IntCode(ref int[] data)
@@ -32,7 +52,6 @@ namespace _2
                         throw new Exception("Unknown opcode");
                 }
             }
-            
         }
     }
 }
