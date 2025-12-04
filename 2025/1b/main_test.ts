@@ -48,7 +48,18 @@ Deno.test(function rotateTest5() {
   assertEquals(rotate(50, "R550"), [0, 6]);
 });
 
-//-5 0 95 1
 Deno.test(function rotateTest6() {
   assertEquals(rotate(0, "L5"), [95, 0]);
+});
+
+Deno.test(function rotateTest7() {
+  assertEquals(rotate(50, "L68"), [82, 1]);
+});
+
+Deno.test(function rotateTest8() {
+  assertEquals(rotate(1, "L2"), [99, 1]);
+});
+
+Deno.test(function rotateTest9() {
+  assertEquals(rotate(99, "R2"), [1, 1]);
 });

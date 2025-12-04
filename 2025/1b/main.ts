@@ -3,18 +3,22 @@ export type TwoNumbers = [number, number];
 export function rotate(current: number, steps: string): TwoNumbers {
   let move = parseInt(steps.slice(1));
   move = steps[0] === "R" ? move : -move;
+  let zeros = Math.floor(Math.abs(move) / 100);
+  move = move % 100;
   let newCurrent = current + move;
-  const shift = newCurrent % 100;
-  let zeros = newCurrent === 0 ? 1 : Math.floor((Math.abs(newCurrent)) / 100);
-  if (shift < 0) {
-    newCurrent = 100 + shift;
+  if (newCurrent < 0) {
+    newCurrent = 100 + newCurrent;
     if (current > 0) {
       zeros++;
     }
-  } else {
-    newCurrent = shift;
   }
-  if (move < -100) zeros++;
+  if (newCurrent === 0 && current > 0) {
+    zeros++;
+  }
+  if (newCurrent >= 100) {
+    newCurrent = newCurrent - 100;
+    zeros++;
+  }
   // console.log(move + " " + current + " " + newCurrent + " " + zeros);
   return [newCurrent, zeros];
 }
