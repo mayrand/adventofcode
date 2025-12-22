@@ -1,4 +1,4 @@
-function stripControlAndFormatPortable(s) {
+function stripControlAndFormatPortable(s: string) {
     // Remove common “invisible” format chars (no \p needed)
     s = s.replace(/[\uFEFF\u200B-\u200D\u2060]/g, ""); // BOM, ZWSP, ZWNJ, ZWJ, WORD JOINER
     // Remove control chars except \n and \r
